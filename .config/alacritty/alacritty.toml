@@ -1,0 +1,27 @@
+[window]
+padding = { x = 15, y = 15 }
+[font]
+builtin_box_drawing = true
+size = 11
+[colors]
+  [colors.primary]
+  foreground = "#C0BFBC"
+  background = "#1C1C1F"
+  [colors.normal]
+  black = "#241F31"
+  blue = "#1E78E4"
+  cyan = "#0AB9DC"
+  green = "#2EC27E"
+  magenta = "#9841BB"
+  red = "#C01C28"
+  white = "#C0BFBC"
+  yellow = "#F5C211"
+  [colors.bright]
+  black = "#5E5C64"
+  blue = "#51A1FF"
+  cyan = "#4FD2FD"
+  green = "#57E389"
+  magenta = "#C061CB"
+  red = "#ED333B"
+  white = "#F6F5F4"
+  yellow = "#F8E45C"
