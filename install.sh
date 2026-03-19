@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+ignorelist=("README.md" "install.sh" ".git" "." "..")
+
 search_folder(){
 	for i in $(ls -a $1); do
-		if [[ "$i" == "install.sh" || "$i" == "." || "$i" == ".." || "$i" == ".git" ]]; then
+		if [[ ${ignorelist[@]} =~ "$i" ]]; then
 			continue
 		elif [[ -d "$1/$i" ]]; then
 			search_folder "$1/$i"
@@ -26,10 +28,22 @@ search_folder(){
 	done
 }
 
+if [[ $0 != "./install.sh" ]]; then
+	echo '''
+You are running this script not from the repo directory!!!
+cd to the directory you downloaded and only then run script by the
+
+	./install.sh
+
+command!
+'''
+	exit 1
+fi
+
 echo '''
 This script will REMOVE every dotfile mentioned in repo 
 IN YOUR HOME DIRECTORY and replace it with symlink to dotfile in repo
 '''
-read -p "Do you wish to continue?(y/n) > " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+read -p "Do you wish to continue?(y/n) > " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 2
 
 search_folder .
