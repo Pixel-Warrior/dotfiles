@@ -19,10 +19,13 @@ search_folder(){
 			fi
 			if [[ ! -d "$HOME/$dir" ]]; then
 				echo "creating directory $HOME/$dir"
-				mkdir "$HOME/$dir"
+				mkdir -p "$HOME/$dir"
+			fi
+			if [[ -e "$targetdir/$i" ]]; then
+				echo "removing existing $targetdir/$i"
+				rm "$targetdir/$i"
 			fi
 			echo "creating symlink to $repofile in $targetdir"
-			rm "$targetdir/$i"
 			ln -s "$repofile" "$targetdir"
 		fi
 	done
