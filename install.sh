@@ -7,16 +7,21 @@ search_folder(){
 		elif [[ -d "$1/$i" ]]; then
 			search_folder "$1/$i"
 		else
-			dir="$(echo "$1" | cut -d '/' -f 2-)"
+			dir="$(echo "$1" | cut -d '/' -s -f 2-)"
+			if [[ -z "$dir" ]]; then
+				repofile="$PWD/$i"
+				targetdir="$HOME"
+			else
+				repofile="$PWD/$dir/$i"
+				targetdir="$HOME/$dir"
+			fi
 			if [[ ! -d "$HOME/$dir" ]]; then
 				echo "creating directory $HOME/$dir"
 				mkdir "$HOME/$dir"
-			else
-				:
 			fi
-			echo "creating symlink to $1/$i"
-			#rm "$HOME/$dir/$i"
-			ln "$1/$i" "$HOME/$dir"
+			echo "creating symlink to $repofile in $targetdir"
+			rm "$targetdir/$i"
+			ln -s "$repofile" "$targetdir"
 		fi
 	done
 }
