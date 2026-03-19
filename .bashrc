@@ -5,13 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PROMPT_COMMAND='exit_code=$?; chg_status=$(cat /sys/class/power_supply/BAT0/status); bat_level=$(cat /sys/class/power_supply/BAT0/capacity); git_status=$(git branch --show-current 2> /dev/null)'
+export bat="/sys/class/power_supply/BAT0"
+
+PROMPT_COMMAND='exit_code=$?; [ -e "$bat" ] && chg_status=$(cat "${bat}/status") && export bat_level=$(cat "${bat}/capacity"); git_status=$(git branch --show-current 2> /dev/null)'
 
 #Changing window title
 PS1='\[\e]2;$TERM \w\a\]'
 
 #Printing battery charge
-PS1+='$([ "$chg_status" = "Discharging" ]&& echo "\[\e[31m\]" || echo "\[\e[32m\]")$bat_level%\[\e[0m\] '
+PS1+='$([ "$chg_status" = "Discharging" ]&& echo "\[\e[31m\]" || echo "\[\e[32m\]")$(echo "$bat_level%\[\e[0m\] ")'
 
 #Printing name
 PS1+='\[\e[90m\]$( [ "$(whoami)" = "root" ] && echo "\[\e[31m\]" )\u'
