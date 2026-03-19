@@ -26,4 +26,10 @@ search_folder(){
 	done
 }
 
+echo '''
+This script will REMOVE every dotfile mentioned in repo 
+IN YOUR HOME DIRECTORY and replace it with symlink to dotfile in repo
+'''
+read -p "Do you wish to continue?(y/n) > " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+
 search_folder .
