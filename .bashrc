@@ -13,7 +13,7 @@ PROMPT_COMMAND='exit_code=$?; [ -e "$bat" ] && chg_status=$(cat "${bat}/status")
 PS1='\[\e]2;$TERM \w\a\]'
 
 #Printing battery charge
-PS1+='$([ "$chg_status" = "Discharging" ]&& echo "\[\e[31m\]" || echo "\[\e[32m\]")$([ -e "$bat" ] && echo "$bat_level%\[\e[0m\] ")'
+PS1+='$([ "$chg_status" = "Discharging" ]&& echo "\[\e[31m\]" || echo "\[\e[32m\]")$([ -e "$bat" ] && echo "$bat_level% ")\[\e[0m\]'
 
 #Printing name
 PS1+='\[\e[90m\]$( [ "$(whoami)" = "root" ] && echo "\[\e[31m\]" )\u'
