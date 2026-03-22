@@ -3,6 +3,7 @@
 "set expandtab
 set autoindent
 syntax on
-source ~/.vim/plugin/latexlivepreview.vim
 set number relativenumber
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
